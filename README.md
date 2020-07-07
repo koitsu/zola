@@ -1,3 +1,10 @@
+# Differences between getzola/zola and this fork
+
+* Supports `---` as an alternate front matter delimiter.  See
+  [getzola/zola/issues/1072](https://github.com/getzola/zola/issues/1072)
+  for further details
+* Document how to build/test zola using Docker
+
 # zola (né Gutenberg)
 
 [![Build Status](https://dev.azure.com/getzola/zola/_apis/build/status/getzola.zola?branchName=master)](https://dev.azure.com/getzola/zola/_build/latest?definitionId=1&branchName=master)
