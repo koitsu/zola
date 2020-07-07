@@ -56,3 +56,16 @@ Many features of Pelican come from plugins, which might be tricky to use because
 [yes]: ./is-yes.svg
 [ehh]: ./is-ehh.svg
 [no]:  ./is-no.svg
+
+## Building zola with Docker
+
+```
+$ docker pull rust:latest
+$ git clone https://github.com/getzola/zola.git
+$ cd zola
+$ docker run --rm -it -u $(id -u):$(id -g) -v ${PWD}:/usr/src/myapp -w /usr/src/myapp rust:latest cargo build --release
+```
+
+The compiled `zola` binary can be found in directory `target/release`.
+
+If you want to run all tests, use `cargo test --workspace` instead.
