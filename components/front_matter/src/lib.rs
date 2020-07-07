@@ -13,7 +13,7 @@ pub use section::SectionFrontMatter;
 
 lazy_static! {
     static ref PAGE_RE: Regex =
-        Regex::new(r"^[[:space:]]*\+\+\+\r?\n((?s).*?(?-s))\+\+\+\r?\n?((?s).*(?-s))$").unwrap();
+        Regex::new(r"^[[:space:]]*(?:\+\+\+|---)\r?\n((?s).*?(?-s))(?:\+\+\+|---)\r?\n?((?s).*(?-s))$").unwrap();
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Serialize, Deserialize)]
@@ -40,7 +40,7 @@ pub enum InsertAnchor {
 fn split_content(file_path: &Path, content: &str) -> Result<(String, String)> {
     if !PAGE_RE.is_match(content) {
         bail!(
-            "Couldn't find front matter in `{}`. Did you forget to add `+++`?",
+            "Couldn't find front matter in `{}`. Did you forget to add `+++` or `---`?",
             file_path.to_string_lossy()
         );
     }
@@ -104,11 +104,39 @@ Hello
     }
 
     #[test]
+    fn can_split_page_content_valid_alternate_token() {
+        let content = r#"
+---
+title = "Title"
+description = "hey there"
+date = 2002-10-12
+---
+Hello
+"#;
+        let (front_matter, content) = split_page_content(Path::new(""), content).unwrap();
+        assert_eq!(content, "Hello\n");
+        assert_eq!(front_matter.title.unwrap(), "Title");
+    }
+
+    #[test]
     fn can_split_section_content_valid() {
         let content = r#"
 +++
 paginate_by = 10
 +++
+Hello
+"#;
+        let (front_matter, content) = split_section_content(Path::new(""), content).unwrap();
+        assert_eq!(content, "Hello\n");
+        assert!(front_matter.is_paginated());
+    }
+
+    #[test]
+    fn can_split_section_content_valid_alternate_token() {
+        let content = r#"
+---
+paginate_by = 10
+---
 Hello
 "#;
         let (front_matter, content) = split_section_content(Path::new(""), content).unwrap();

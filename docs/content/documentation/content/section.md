@@ -23,12 +23,14 @@ Markdown file using relative links.
 The `_index.md` file within a directory defines the content and metadata for that section.  To set
 the metadata, add front matter to the file.
 
-The TOML front matter is a set of metadata embedded in a file at the beginning of the file enclosed by triple pluses (`+++`).
+The TOML front matter is a set of metadata embedded in a file at the beginning of the file enclosed by
+triple pluses (`+++`) or alternately triple hyphens (`---`).
 
-After the closing `+++`, you can add content, which will be parsed as Markdown and made available
-to your templates through the `section.content` variable.
+After the closing `+++` or `---`, you can add content, which will be parsed as Markdown and made
+available to your templates through the `section.content` variable.
 
-Although none of the front matter variables are mandatory, the opening and closing `+++` are required.
+Although none of the front matter variables are mandatory, the opening and closing `+++` or `---`
+are required.
 
 Here is an example `_index.md` with all the available variables. The values provided below are the
 default values.

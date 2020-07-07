@@ -75,9 +75,10 @@ The file `content/blog/2018-10-10-hello-world.md` will yield a page at `[base_ur
 ## Front matter
 
 The TOML front matter is a set of metadata embedded in a file at the beginning of the file enclosed
-by triple pluses (`+++`).
+by triple pluses (`+++`) or alternately triple hyphens (`---`).
 
-Although none of the front matter variables are mandatory, the opening and closing `+++` are required.
+Although none of the front matter variables are mandatory, the opening and closing `+++` or `---`
+are required.
 
 Here is an example page with all the available variables. The values provided below are the
 default values.

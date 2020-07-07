@@ -117,7 +117,7 @@ page_template = "blog-page.html"
 +++
 ```
 
-> Note that although no variables are mandatory, the opening and closing `+++` are required.
+> Note that although no variables are mandatory, the opening and closing `+++` or `---` are required.
 
 * *sort_by = "date"* tells Zola to use the date to order our section pages (more on pages below). 
 * *template = "blog.html"* tells Zola to use `blog.html` in the `templates` directory as the template for listing the Markdown files in this section. 
